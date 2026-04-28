@@ -33,13 +33,27 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'titulo' => 'required|string|max:100',
-            'descripcion' => 'nullable|string',
-            'prioridad' => 'required|in:baja,media,alta',
-            'fecha_limite' => 'nullable|date'
-        ]);
+        $request->validate(
+    [
+        'titulo' => 'required|string|min:3|max:100',
+        'descripcion' => 'nullable|string|max:500',
+        'prioridad' => 'required|in:baja,media,alta',
+        'fecha_limite' => 'nullable|date|after_or_equal:today',
+    ],
+    [
+        'titulo.required' => 'El título es obligatorio y debe tener entre 3 y 100 caracteres.',
+        'titulo.min' => 'El título es obligatorio y debe tener entre 3 y 100 caracteres.',
+        'titulo.max' => 'El título es obligatorio y debe tener entre 3 y 100 caracteres.',
 
+        'descripcion.max' => 'La descripción no puede superar los 500 caracteres.',
+
+        'prioridad.required' => 'La prioridad debe ser baja, media o alta.',
+        'prioridad.in' => 'La prioridad debe ser baja, media o alta.',
+
+        'fecha_limite.after_or_equal' => 'La fecha límite debe ser hoy o una fecha futura.',
+        'fecha_limite.date' => 'La fecha límite debe ser hoy o una fecha futura.',
+    ]
+);
         Tarea::create($request->all());
 
         return redirect()->route('tareas.index')
@@ -58,19 +72,34 @@ class TareaController extends Controller
     }
 
     /**
-     * Actualiza una tarea
+     * Actualiza una tarea 
      * @param Request $request
      * @param mixed $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'titulo' => 'required|string|max:100',
-            'descripcion' => 'nullable|string',
-            'prioridad' => 'required|in:baja,media,alta',
-            'fecha_limite' => 'nullable|date'
-        ]);
+        $request->validate(
+    [
+        'titulo' => 'required|string|min:3|max:100',
+        'descripcion' => 'nullable|string|max:500',
+        'prioridad' => 'required|in:baja,media,alta',
+        'fecha_limite' => 'nullable|date|after_or_equal:today',
+    ],
+    [
+        'titulo.required' => 'El título es obligatorio y debe tener entre 3 y 100 caracteres.',
+        'titulo.min' => 'El título es obligatorio y debe tener entre 3 y 100 caracteres.',
+        'titulo.max' => 'El título es obligatorio y debe tener entre 3 y 100 caracteres.',
+
+        'descripcion.max' => 'La descripción no puede superar los 500 caracteres.',
+
+        'prioridad.required' => 'La prioridad debe ser baja, media o alta.',
+        'prioridad.in' => 'La prioridad debe ser baja, media o alta.',
+
+        'fecha_limite.after_or_equal' => 'La fecha límite debe ser hoy o una fecha futura.',
+        'fecha_limite.date' => 'La fecha límite debe ser hoy o una fecha futura.',
+    ]
+);
 
         $tarea = Tarea::findOrFail($id);
         $tarea->update($request->all());
