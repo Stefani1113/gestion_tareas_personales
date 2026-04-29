@@ -2,9 +2,7 @@
 
 @section('content')
 
-<a href="{{ route('tareas.create') }}" class="btn btn-primary mb-3">Crear tarea</a>
-
-<table class="table table-bordered">
+<table class="table table-bordered" style="margin-top: 50px;">
     <thead>
         <tr>
             <th>Título</th>
@@ -52,7 +50,7 @@
                 <form action="{{ route('tareas.toggle', $tarea->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    <button class="btn btn-sm btn-secondary">✓</button>
+                    <button class="btn btn-sm btn-success">✓</button>
                 </form>
 
             </td>
@@ -61,5 +59,7 @@
         @endforeach
     </tbody>
 </table>
+
+<a href="{{ route('tareas.create') }}" class="btn btn-primary mb-3">Crear tarea</a>
 
 @endsection

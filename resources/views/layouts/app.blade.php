@@ -7,9 +7,12 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container">
-        <span class="navbar-brand">Mis Tareas</span>
+<nav class="navbar bg-body-black bg-primary-subtle border border-primary-subtle">
+    <div class="container-fluid ">
+    <a class="navbar-brand" href="#">
+        <img src="{{ asset('images/note_4371099.png') }}" alt="Logo" width="23" height="24" class="d-inline-block align-text-top" style="margin-left: 100px">
+        Mis Tareas
+    </a>
     </div>
 </nav>
 
